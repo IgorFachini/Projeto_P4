@@ -24,7 +24,7 @@ public class TestarPersistencia {
         findAllUsersTest();
         //findAllRulesTest();
 
-        updateAllUsersTest();
+        //updateAllUsersTest();
 
         //findAllUsersTest();
        if(autenticar("Fabio@prog4.net", "Fabio#12345") != null){

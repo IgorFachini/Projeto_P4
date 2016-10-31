@@ -24,6 +24,7 @@
     <body>  
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         <h1>Generos</h1>
+        <a href="mvc?cmd=GeneroCmd&action=adicionar">Adicionar</a>
         <table class="table" id="tableGenero" name="tableGenero" size="3" class="form-control">
             <caption>Afficher des Utlisateurs</caption>
             <tr>
@@ -34,14 +35,11 @@
 
             <c:forEach var="o" items="${generos}">
                 <tr>
-
                     <td><c:out value="${o.id}" /></td>
                     <td><c:out value="${o.nome}" /></td>
                     <td>
-                        <a href="mvc?controller=GeneroControllerServlet.do?action=edit&id=<c:out value="${o.id }"/>">Update</a></td>
-                    <td>
-
-
+                        <a href="mvc?cmd=GeneroCmd&action=editar&id=<c:out value="${o.id}"/>">Update</a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

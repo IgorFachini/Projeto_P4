@@ -23,20 +23,18 @@
     </head>
     <body>
         <h1>Editar genero</h1>
-        <form action="GeneroCmd.do" method="post">
+        <form action="mvc?cmd=GeneroCmd&action=editado" method="post">
             <fieldset>
                 <div>
-                    <label for="id"> ID</label> <input type="text"
-                                                              name="id" value="<c:out value="${genero.id}" />"
-                                                              readonly="readonly" placeholder="Genero ID" />
+                    <label for="id"> ID</label> 
+                    <input class="form-control" type="text" name="id" value="<c:out value="${genero.id}" />" readonly="readonly" placeholder="Genero ID" />
                 </div>
                 <div>
-                    <label for="nome">First Name</label> <input type="text"
-                                                                     name="nome" value="<c:out value="${genero.nome}" />"
-                                                                     placeholder="nome" />
+                    <label for="nome">Nome</label> 
+                    <input class="form-control" type="text" name="nome" value="<c:out value="${genero.nome}" />" placeholder="nome" />
                 </div>              
                 <div>
-                    <input type="submit" value="Submit" />
+                    <input class="btn btn-primary" type="submit" value="Submit" />
                 </div>
             </fieldset>
         </form>

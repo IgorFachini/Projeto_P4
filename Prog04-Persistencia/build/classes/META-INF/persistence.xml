@@ -5,6 +5,8 @@
     <class>org.catolica.prog4.persistencia.entities.User</class>
     <class>org.catolica.prog4.persistencia.entities.Rule</class>
     <class>org.catolica.prog4.persistencia.entities.Livro</class>
+    <class>org.catolica.prog4.persistencia.entities.puta</class>
+    <class>org.catolica.prog4.persistencia.entities.Genero2</class>
     <class>org.catolica.prog4.persistencia.entities.Genero</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/prog4?zeroDateTimeBehavior=convertToNull"/>
