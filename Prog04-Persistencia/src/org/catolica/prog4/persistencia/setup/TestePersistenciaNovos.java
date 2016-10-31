@@ -27,7 +27,7 @@ public class TestePersistenciaNovos {
 
     }
 
-    private static void createGenerotest() {
+    public static void createGenerotest() {
         System.out.println("\ncreateGenerotest...");
         String[] data = {"Game", "Guerra", "Locura"};
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenciaPU");

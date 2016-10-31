@@ -19,11 +19,12 @@ public class TestarPersistencia {
         //deleteAllRuleTest();
         
         createUserTest();
-        createRuletest();
-        //findAllUsersTest();
+        TestePersistenciaNovos.createGenerotest();
+        //createRuletest();
+        findAllUsersTest();
         //findAllRulesTest();
 
-        //updateAllUsersTest();
+        updateAllUsersTest();
 
         //findAllUsersTest();
        if(autenticar("Fabio@prog4.net", "Fabio#12345") != null){
@@ -72,6 +73,11 @@ public class TestarPersistencia {
             o.setSenha(data[i] + "#12345");
             dao.create(o);
         }
+        User o = new User();
+        o.setNome("1");
+        o.setEmail("1");
+        o.setSenha("1");
+        dao.create(o);
     }
 
     private static void createRuletest() {

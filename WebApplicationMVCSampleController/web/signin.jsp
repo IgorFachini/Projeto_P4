@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="form-group col-md-offset-4 col-md-4 ">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" required="required" placeholder="Digite o nome">
+                        <input type="text" class="form-control" id="email" name="email" required="required" placeholder="Digite o nome">
 
                         <label for="senha">Senha:</label>
                         <input type="password" class="form-control" id="senha" name="senha" required="required" placeholder="Digite sua senha">
