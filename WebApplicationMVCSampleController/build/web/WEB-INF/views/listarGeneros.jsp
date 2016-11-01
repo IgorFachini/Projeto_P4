@@ -19,29 +19,60 @@
         <!-- Bootstrap -->
         <link href="assets/core/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Bootstrap theme -->
+        <link href="../../assets/jquery/jquery.bootgrid.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/core/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css" rel="stylesheet">        
     </head>
-    <body>  
+    <body class="container-fluid">  
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         <h1>Generos</h1>
-        <a href="mvc?cmd=GeneroCmd&action=adicionar">Adicionar</a>
-        <table class="table" id="tableGenero" name="tableGenero" size="3" class="form-control">
-            <caption>Afficher des Utlisateurs</caption>
-            <tr>
-                <th>Id</th>
-                <th>Genero</th>
-                <th>Ações</th>
-            </tr>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <p>
+                        <a href="mvc?cmd=GeneroCmd&action=adicionar" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            Adicionar</a>
+                    </p>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-6">
+                <div class="input-group" href="mvc?cmd=GeneroCmd&action=procurar">
+                    <input type="text" class="form-control" placeholder="Procurar pelo id" id="cProcurar" name="cProcurar"/>
+                    <span class="input-group-btn">
+                        <a   class="btn btn-default">Ir</a>
+                    </span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
 
-            <c:forEach var="o" items="${generos}">
+
+        <table id="grid-basic" class="table table-condensed table-hover table-striped">
+            <thead>
                 <tr>
-                    <td><c:out value="${o.id}" /></td>
-                    <td><c:out value="${o.nome}" /></td>
-                    <td>
-                        <a href="mvc?cmd=GeneroCmd&action=editar&id=<c:out value="${o.id}"/>">Update</a>
-                    </td>
+                    <th>ID</th>
+                    <th>Genero</th>
+                    <th>Ações</th>
                 </tr>
-            </c:forEach>
+            </thead>
+            <tbody>
+                <c:forEach var="o" items="${generos}">
+                    <tr>
+                        <td><c:out value="${o.id}" /></td>
+                        <td><c:out value="${o.nome}" /></td>
+                        <td>
+                            <a href="mvc?cmd=GeneroCmd&action=detalhes&id=<c:out value="${o.id}"/>" class="btn btn-success" data-toggle="tooltip" data-placement="left" >
+                                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                            </a> 
+                            <a href="mvc?cmd=GeneroCmd&action=editar&id=<c:out value="${o.id}"/>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" >
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </a> 
+                            <a href="mvc?cmd=GeneroCmd&action=deletar&id=<c:out value="${o.id}"/>" class="btn btn-danger" data-toggle="tooltip" data-placement="right" >
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </a> 
+
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
         </table>
 
 
@@ -49,7 +80,7 @@
 ================================================== -->
         <script type="text/javascript" src="assets/core/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="assets/core/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-
+        <script src="../../assets/jquery/jquery.bootgrid.min.js" type="text/javascript"></script>
         <script type="text/javascript">
             $(document).ready(function () {
 

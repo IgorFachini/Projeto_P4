@@ -123,6 +123,8 @@ public class GeneroJpaController implements Serializable{
             em.close();
         }
     }
+    
+    
 
     public int getGeneroCount() {
         EntityManager em = getEntityManager();

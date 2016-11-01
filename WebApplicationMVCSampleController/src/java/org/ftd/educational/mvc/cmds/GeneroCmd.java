@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.catolica.prog4.persistencia.daos.GeneroDAO;
+import org.catolica.prog4.persistencia.daos.exceptions.NonexistentEntityException;
 import org.catolica.prog4.persistencia.entities.Genero;
 import org.ftd.educational.mvc.abstacts.AbstractWebCmd;
 import org.ftd.educational.mvc.interfaces.IWebCmd;
@@ -27,7 +28,7 @@ import org.ftd.educational.mvc.interfaces.IWebCmd;
  */
 public class GeneroCmd extends AbstractWebCmd implements IWebCmd {
 
-    private GeneroDAO dao;
+    private final GeneroDAO dao;
     public static final String list = "/WEB-INF/views/listarGeneros.jsp";
     public static final String INSERT_OR_EDIT = "/WEB-INF/views/adicionar_editarGenero.jsp";
     public String forward = "";
@@ -46,7 +47,16 @@ public class GeneroCmd extends AbstractWebCmd implements IWebCmd {
             action = request.getParameter("action");
         }
 
-        if (action.equalsIgnoreCase("editar")) {
+        if (action.equalsIgnoreCase("deletar")) {
+            
+            Long id = Long.parseLong(request.getParameter("id"));
+            try {
+                dao.destroy(id);
+            } catch (NonexistentEntityException ex) {
+                Logger.getLogger(GeneroCmd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            recarregarListagem(request);
+        } else if (action.equalsIgnoreCase("editar")) {
             Long id = Long.parseLong(request.getParameter("id"));
             Genero genero = dao.findGenero(id);
             request.setAttribute("genero", genero);
@@ -71,12 +81,16 @@ public class GeneroCmd extends AbstractWebCmd implements IWebCmd {
 
         } else if (action.equalsIgnoreCase("adicionar")) {
             forward = INSERT_OR_EDIT;
-        } else {
+        } else if(action.equalsIgnoreCase("procurar")){
+            Long conteudo  = Long.parseLong(request.getParameter("cProcurar"));
+            Genero genero = dao.findGenero(conteudo);
+            forward = list;
+            request.setAttribute("generos", genero);
+        }else {
             recarregarListagem(request);
         }
 
-        //RequestDispatcher view = request.getRequestDispatcher(forward);
-        //view.forward(request, response);
+       
         return forward;
     }
 
@@ -88,8 +102,7 @@ public class GeneroCmd extends AbstractWebCmd implements IWebCmd {
     private List<Genero> allGeneros() {
 
         List<Genero> lst = dao.findGeneroEntities();
-        //Iterator<Genero> itr = lst.iterator();
-        //lst.get(0).getNome()
+        
         return lst;
     }
 

@@ -5,14 +5,20 @@
  */
 package org.catolica.prog4.persistencia.daos;
 
+import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import org.catolica.prog4.persistencia.entities.Genero;
 
 /**
  *
  * @author Cyber
  */
-public class GeneroDAO extends GeneroJpaController{
-     public GeneroDAO(EntityManagerFactory emf) {
+public class GeneroDAO extends GeneroJpaController {
+
+    public GeneroDAO(EntityManagerFactory emf) {
         super(emf);
     }
+    
+   
 }
