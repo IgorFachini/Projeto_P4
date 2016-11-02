@@ -20,11 +20,9 @@ import org.catolica.prog4.persistencia.entities.Genero;
  *
  * @author Cyber
  */
-public class GeneroJpaController implements Serializable{
-    
-    
-    
-     public GeneroJpaController(EntityManagerFactory emf) {
+public class GeneroJpaController implements Serializable {
+
+    public GeneroJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -33,7 +31,9 @@ public class GeneroJpaController implements Serializable{
         return emf.createEntityManager();
     }
     
-      public void create(Genero genero) {
+    
+
+    public void create(Genero genero) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -123,8 +123,6 @@ public class GeneroJpaController implements Serializable{
             em.close();
         }
     }
-    
-    
 
     public int getGeneroCount() {
         EntityManager em = getEntityManager();

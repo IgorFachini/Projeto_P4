@@ -19,6 +19,10 @@ import javax.persistence.NamedQuery;
  * @author Cyber
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Genero.procurar",
+            query = "SELECT o FROM Genero o WHERE o.Nome LIKE :Nome ")
+})
 
 public class Genero implements Serializable {
 

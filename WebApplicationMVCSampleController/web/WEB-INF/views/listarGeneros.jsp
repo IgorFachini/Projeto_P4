@@ -35,12 +35,14 @@
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
             <div class="col-lg-6">
-                <div class="input-group" href="mvc?cmd=GeneroCmd&action=procurar">
-                    <input type="text" class="form-control" placeholder="Procurar pelo id" id="cProcurar" name="cProcurar"/>
+                <form action="mvc?cmd=GeneroCmd&action=procurar" method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Procurar pelo nome" id="cProcurar" name="cProcurar"/>
                     <span class="input-group-btn">
-                        <a   class="btn btn-default">Ir</a>
+                        <input class="btn btn-warning" type="submit" value="Ir" />
                     </span>
                 </div><!-- /input-group -->
+                </form>
             </div><!-- /.col-lg-6 -->
         </div><!-- /.row -->
 

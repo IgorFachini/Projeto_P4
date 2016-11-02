@@ -5,11 +5,8 @@
         <group>
             <file>file:/C:/Projetos/P4/Projeto_P4/WebApplicationMVCSampleController/src/java/org/ftd/educational/mvc/controllers/AuthenticationControllerServlet.java</file>
             <file>file:/C:/Projetos/P4/Projeto_P4/WebApplicationMVCSampleController/src/java/org/ftd/educational/mvc/cmds/GeneroCmd.java</file>
-            <file>file:/C:/Projetos/P4/Projeto_P4/WebApplicationMVCSampleController/web/WEB-INF/views/editarGenero.jsp</file>
-            <file>file:/C:/Projetos/P4/Projeto_P4/WebApplicationMVCSampleController/web/signin.jsp</file>
+            <file>file:/C:/Projetos/P4/Projeto_P4/WebApplicationMVCSampleController/web/WEB-INF/views/adicionar_editarGenero.jsp</file>
             <file>file:/C:/Projetos/P4/Projeto_P4/WebApplicationMVCSampleController/web/WEB-INF/views/listarGeneros.jsp</file>
-            <file>file:/C:/Projetos/P4/Projeto_P4/WebApplicationMVCSampleController/src/java/org/ftd/educational/mvc/controllers/GeneroControllerServlet.java</file>
-            <file>file:/C:/Projetos/P4/Projeto_P4/WebApplicationMVCSampleController/src/java/org/ftd/educational/mvc/controllers/CmdControllerServlet.java</file>
         </group>
     </open-files>
 </project-private>
