@@ -1,4 +1,4 @@
-package org.catolica.prog4.persistencia.daos;
+package org.catolica.prog4.persistencia.interfaces;
 
 import java.util.List;
 import javax.persistence.EntityManager;

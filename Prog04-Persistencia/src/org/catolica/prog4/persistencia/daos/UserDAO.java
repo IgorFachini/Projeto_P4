@@ -1,5 +1,6 @@
 package org.catolica.prog4.persistencia.daos;
 
+import org.catolica.prog4.persistencia.interfaces.IUserDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

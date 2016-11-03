@@ -30,8 +30,8 @@ import org.ftd.educational.mvc.interfaces.IWebCmd;
 public class GeneroCmd extends AbstractWebCmd implements IWebCmd {
 
     private final GeneroDAO dao;
-    public static final String list = "/WEB-INF/views/listarGeneros.jsp";
-    public static final String INSERT_OR_EDIT = "/WEB-INF/views/adicionar_editarGenero.jsp";
+    public static final String list = "/WEB-INF/views/generoViews/listarGeneros.jsp";
+    public static final String INSERT_OR_EDIT = "/WEB-INF/views/generoViews/adicionar_editarGenero.jsp";
     public String forward = "";
 
     public GeneroCmd() {

@@ -5,6 +5,7 @@
  */
 package org.catolica.prog4.persistencia.daos;
 
+import org.catolica.prog4.persistencia.interfaces.IGeneroDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;

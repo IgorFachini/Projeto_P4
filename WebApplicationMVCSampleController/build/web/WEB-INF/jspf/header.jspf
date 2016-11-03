@@ -1,0 +1,42 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+
+ 
+
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="" class="navbar-brand">
+                <p>Prog4_CRUD</p>
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CRUDS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">User</a></li>
+                        <li><a href="">Rule</a></li>           
+                        <li role="separator" class="divider"></li>
+                        <li><a href=""></a></li>
+                        <li><a href="mvc?cmd=GeneroCmd">Genero</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Bem vindo ${username}</a></li>
+                <li><a href="mvc?cmd=LogoutCmd">Logout</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
