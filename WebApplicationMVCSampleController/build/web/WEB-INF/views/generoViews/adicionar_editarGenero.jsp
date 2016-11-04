@@ -4,24 +4,14 @@
     Author     : Cyber
 --%>
 
-<%@page import="javax.persistence.Persistence"%>
-<%@page import="javax.persistence.EntityManagerFactory"%>
-<%@page import="javax.persistence.EntityManagerFactory"%>
-<%@page import="org.catolica.prog4.persistencia.entities.Genero"%>
-<%@page import="org.catolica.prog4.persistencia.daos.GeneroDAO"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Editar Generos</title>
+
+        <title>Adicionar/Editar Generos</title>
         <!-- Bootstraps -->
         <%@include file="/WEB-INF/jspf/head.jspf"%>
-    </head>
-    <body>
-        
-        <div class="container-fluid">
-            <h1>Editar genero</h1>
+   
+        <h1>${tAdEd} genero</h1>
+        <hr />
+        <dl class="dl-horizontal">
             <form action="mvc?cmd=GeneroCmd&action=editado" method="post">
                 <fieldset>
                     <div>
@@ -30,21 +20,19 @@
                     </div>
                     <div>
                         <label for="nome">Nome</label> 
-                        <input class="form-control" type="text" name="nome" value="<c:out value="${genero.nome}" />" placeholder="nome" />
-                    </div>              
-                    <div>
-                        <input class="btn btn-primary" type="submit" value="Submit" />
+                        <input class="form-control" type="text" required="required" name="nome" value="<c:out value="${genero.nome}" />" placeholder="nome" />
+                    </div>   
+
+                    <hr />
+
+                    <div>    
+                        <button type="submit" class="btn btn-success" >Salvar</button> | 
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
                     </div>
                 </fieldset>
             </form>
+        </dl>
 
-        </div>
         <%@include file="/WEB-INF/jspf/footer.jspf"%>
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-
-            });
-        </script>
-    </body>
-</html>
+        

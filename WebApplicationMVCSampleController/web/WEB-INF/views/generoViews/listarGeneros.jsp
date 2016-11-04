@@ -17,7 +17,7 @@
         <%@include file="/WEB-INF/jspf/header.jspf"%>
         <div  class="container-fluid">
 
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            
             <h1>Generos</h1>
             <div class="row">
                 <div class="col-lg-6">
@@ -33,7 +33,8 @@
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Procurar pelo nome" id="cProcurar" name="cProcurar"/>
                             <span class="input-group-btn">
-                                <input class="btn btn-warning" type="submit" value="Ir" />
+                                
+                                <a class="btn btn-warning" type="submit" value="Ir" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
                             </span>
                         </div>
                     </form>
@@ -61,7 +62,7 @@
                                 <a href="mvc?cmd=GeneroCmd&action=editar&id=<c:out value="${o.id}"/>" class="btn btn-warning" data-toggle="modal" data-target="#util-modal" data-placement="top" >
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                 </a> 
-                                <a href="mvc?cmd=GeneroCmd&action=deletar&id=<c:out value="${o.id}"/>" class="btn btn-danger"  data-placement="right" >
+                                <a href="mvc?cmd=GeneroCmd&action=deletar?&id=<c:out value="${o.id}"/>" class="btn btn-danger"  data-toggle="modal" data-target="#util-modal" data-placement="right" >
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </a> 
 

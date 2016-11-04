@@ -29,10 +29,15 @@ import org.ftd.educational.mvc.interfaces.IWebCmd;
  */
 public class GeneroCmd extends AbstractWebCmd implements IWebCmd {
 
+    private static final String list = "/WEB-INF/views/generoViews/listarGeneros.jsp";
+    private static final String INSERT_OR_EDIT = "/WEB-INF/views/generoViews/adicionar_editarGenero.jsp";
+    private static final String detalhes = "/WEB-INF/views/generoViews/detalhesGenero.jsp";
+    private static final String deletar = "/WEB-INF/views/generoViews/deletarGenero.jsp";
+    private String forward = "";
+
     private final GeneroDAO dao;
-    public static final String list = "/WEB-INF/views/generoViews/listarGeneros.jsp";
-    public static final String INSERT_OR_EDIT = "/WEB-INF/views/generoViews/adicionar_editarGenero.jsp";
-    public String forward = "";
+    private Long id;
+    private Genero genero;
 
     public GeneroCmd() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenciaPU");
@@ -42,16 +47,20 @@ public class GeneroCmd extends AbstractWebCmd implements IWebCmd {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         super.setDefaultAppModel(request);
-        Long id = null;
-        Genero genero = null;
+        id = null;
+        genero = null;
         String action = "";
         if (request.getParameter("action") != null) {
             action = request.getParameter("action");
         }
         switch (action) {
-
-            case "deletar":
-
+            case "detalhes":
+                repassarParamentroParaTela(request, detalhes);
+                break;
+            case "deletar?":
+                repassarParamentroParaTela(request, deletar);
+                break;
+            case "excluido":
                 id = Long.parseLong(request.getParameter("id"));
                 try {
                     dao.destroy(id);
@@ -59,14 +68,11 @@ public class GeneroCmd extends AbstractWebCmd implements IWebCmd {
                     Logger.getLogger(GeneroCmd.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 recarregarListagem(request);
-
                 break;
             case "editar":
 
-                id = Long.parseLong(request.getParameter("id"));
-                genero = dao.findGenero(id);
-                request.setAttribute("genero", genero);
-                forward = INSERT_OR_EDIT;
+                request.setAttribute("tAdEd", "Editar");
+                repassarParamentroParaTela(request, INSERT_OR_EDIT);
 
                 break;
             case "editado":
@@ -90,9 +96,8 @@ public class GeneroCmd extends AbstractWebCmd implements IWebCmd {
 
                 break;
             case "adicionar":
-
+                request.setAttribute("tAdEd", "Adicionar");
                 forward = INSERT_OR_EDIT;
-
                 break;
             case "procurar":
 
@@ -126,6 +131,13 @@ public class GeneroCmd extends AbstractWebCmd implements IWebCmd {
         List<Genero> lst = dao.findGeneroEntities();
 
         return lst;
+    }
+
+    private void repassarParamentroParaTela(HttpServletRequest request, String tela) {
+        id = Long.parseLong(request.getParameter("id"));
+        genero = dao.findGenero(id);
+        request.setAttribute("genero", genero);
+        forward = tela;
     }
 
 }
