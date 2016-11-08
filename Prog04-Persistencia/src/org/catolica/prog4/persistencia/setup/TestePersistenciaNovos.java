@@ -29,7 +29,7 @@ public class TestePersistenciaNovos {
 
     public static void createGenerotest() {
         System.out.println("\ncreateGenerotest...");
-        String[] data = {"Game", "Guerra", "Locura"};
+        String[] data = {"Guerra", "Romance", "RPG"};
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenciaPU");
         GeneroDAO dao = new GeneroDAO(factory);
         List<Genero> lst = dao.findGeneroEntities();

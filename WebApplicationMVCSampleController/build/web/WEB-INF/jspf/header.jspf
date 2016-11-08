@@ -2,7 +2,7 @@
 <%@ page pageEncoding="UTF-8" %>
 
 
- 
+
 
 
 <nav class="navbar navbar-default">
@@ -28,6 +28,7 @@
                         <li><a href="">Rule</a></li>           
                         <li role="separator" class="divider"></li>
                         <li><a href=""></a></li>
+                        <li><a href="mvc?cmd=LivroCmd">Livro</a></li>
                         <li><a href="mvc?cmd=GeneroCmd">Genero</a></li>
                     </ul>
                 </li>

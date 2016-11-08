@@ -7,7 +7,7 @@
 
 <%@include file="/WEB-INF/jspf/head.jspf"%>
 
-<h1>Detalhes Genero?</h1>
+<h1>Deletar Genero?</h1>
 <hr />
 <form action="mvc?cmd=GeneroCmd&action=excluido" method="post">
     <dl class="dl-horizontal">
@@ -16,7 +16,7 @@
         </dt>
 
         <dd>
-        <input class="form-control" type="text" name="id" value="<c:out value="${genero.id}" />" readonly="readonly" placeholder="Genero ID" />    
+            <input class="form-control" type="text" name="id" value="<c:out value="${genero.id}" />" readonly="readonly" placeholder="Genero ID" />    
         </dd>
         <dt>
             <p><strong>Nome:</strong></p>
@@ -25,7 +25,6 @@
         <dd>
         <td><c:out value="${genero.nome}" /></td>
         </dd>
-
     </dl>
     <hr />
     <p>

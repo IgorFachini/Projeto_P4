@@ -6,6 +6,7 @@
 package org.catolica.prog4.persistencia.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -29,10 +31,14 @@ public class Genero implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "genero_id")
     private Long id;
     
     @Column(unique = true, nullable = false, length = 45)
     private String Nome;
+    
+    @OneToMany(mappedBy = "genero")
+    private List<Livro> livros;
 
     public Long getId() {
         return id;
@@ -49,6 +55,16 @@ public class Genero implements Serializable {
     public void setNome(String Nome) {
         this.Nome = Nome;
     }
+
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
+    }
+    
+    
     
     
 

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class AbstractWebCmd {
 
     protected void setDefaultAppModel(HttpServletRequest request) {
-        request.setAttribute("appName", "App Name Sample");
+        request.setAttribute("appName", "Crud");
     }
     
     

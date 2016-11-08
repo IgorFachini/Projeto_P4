@@ -4,3 +4,25 @@
 
 <script type="text/javascript" src="assets/core/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="assets/core/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script src="assets/core/toastr.min.js"></script>
+<script type="text/javascript">
+   
+    
+    function isEmpty(str) {
+        return (!str || 0 === str.length);
+    }
+
+    $(document).ready(function () {
+       
+        if (!isEmpty("${erro}")) {
+            toastr['error']("${erro}");
+        }
+
+        if (!isEmpty("${msg}")) {
+            toastr['success']("${msg}");
+        }
+
+
+
+    });
+</script>
