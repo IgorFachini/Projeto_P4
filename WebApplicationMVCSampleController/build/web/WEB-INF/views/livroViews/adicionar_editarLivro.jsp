@@ -8,30 +8,6 @@
 <title>Adicionar/Editar Generos</title>
 <!-- Bootstraps -->
 <%@include file="/WEB-INF/jspf/head.jspf"%>
-<!--
-<h1> livro</h1>
-<hr />
-<dl class="dl-horizontal">
-    <form action="mvc?cmd=GeneroCmd&action=editado" method="post">
-        <fieldset>
-            <div>
-                <label for="id"> ID</label> 
-                <input class="form-control" type="text" name="id" value="" readonly="readonly" placeholder="Genero ID" />
-            </div>
-            <div>
-                <label for="nome">Nome</label> 
-                <input class="form-control" type="text" required="required" name="nome" value="" placeholder="nome" />
-            </div>   
-
-            <hr />
-
-            <div>    
-                <button type="submit" class="btn btn-success" >Salvar</button> | 
-                <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
-            </div>
-        </fieldset>
-    </form>
-</dl>-->
 <div class="form-group"><h2><span class="glyphicon glyphicon-plus"></span> ${tAdEd} livro</h2></div>
 
 <hr />
@@ -77,10 +53,6 @@
                 </c:forEach>                                    
             </SELECT>
         </div>  
-      
-
-
-
     </div>
 
     <div class="form-group">

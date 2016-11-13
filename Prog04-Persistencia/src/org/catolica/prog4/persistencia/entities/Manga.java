@@ -6,42 +6,37 @@
 package org.catolica.prog4.persistencia.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Cyber
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "Genero.procurar",
-            query = "SELECT o FROM Genero o WHERE o.Nome LIKE :Nome ")
-})
-
-public class Genero implements Serializable {
+public class Manga implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "genero_id")
+    @Column(name = "manga_id")
     private Long id;
 
-    @Column(unique = true, nullable = false, length = 45)
-    private String Nome;
-
-    @OneToMany(mappedBy = "genero")
-    private List<Livro> livros;
-
-    @OneToMany(mappedBy = "genero")
-    private List<Manga> mangas;
+    @Column(unique = true, nullable = false, length = 80)
+    private String titulo;
+    @Column(unique = false, nullable = true, length = 45)
+    private String descricao;
+    @Column(unique = false, nullable = true, length = 100)
+    private String valor;
+    
+    @ManyToOne
+    @JoinColumn(name = "genero_id", nullable = false)
+    private Genero genero;
 
     public Long getId() {
         return id;
@@ -51,28 +46,36 @@ public class Genero implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return Nome;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNome(String Nome) {
-        this.Nome = Nome;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public List<Livro> getLivros() {
-        return livros;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setLivros(List<Livro> livros) {
-        this.livros = livros;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public List<Manga> getMangas() {
-        return mangas;
+    public String getValor() {
+        return valor;
     }
 
-    public void setMangas(List<Manga> mangas) {
-        this.mangas = mangas;
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
     }
     
     
@@ -87,10 +90,10 @@ public class Genero implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Genero)) {
+        if (!(object instanceof Manga)) {
             return false;
         }
-        Genero other = (Genero) object;
+        Manga other = (Manga) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -99,7 +102,7 @@ public class Genero implements Serializable {
 
     @Override
     public String toString() {
-        return "org.catolica.prog4.persistencia.entities.Genero[ id=" + id + " ]";
+        return "org.catolica.prog4.persistencia.entities.Manga[ id=" + id + " ]";
     }
 
 }

@@ -27,8 +27,13 @@
         </dd>
     </dl>
     <hr />
+    <div class="form-group col-md-offset-1">
+        ${msgLivros}${e}
+        ${msgMangas}
+        ${esseGenero}
+    </div>
     <p>
-        <button type="submit" class="btn btn-danger" >Excluir</button> | 
+        <button type="submit" class="btn btn-danger" ${botaoDesabilitado} >Excluir</button> | 
         <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
     </p>
 </form>

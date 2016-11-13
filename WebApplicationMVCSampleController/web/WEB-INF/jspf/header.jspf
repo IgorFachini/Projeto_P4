@@ -24,12 +24,12 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CRUDS <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="">User</a></li>
-                        <li><a href="">Rule</a></li>           
+                        <li hidden=""><a href="">Usuarios</a></li>                        
                         <li role="separator" class="divider"></li>
                         <li><a href=""></a></li>
-                        <li><a href="mvc?cmd=LivroCmd">Livro</a></li>
-                        <li><a href="mvc?cmd=GeneroCmd">Genero</a></li>
+                        <li><a href="mvc?cmd=LivroCmd">Livros</a></li>
+                        <li><a href="mvc?cmd=MangaCmd">Mangas</a></li>
+                        <li><a href="mvc?cmd=GeneroCmd">Generos</a></li>
                     </ul>
                 </li>
             </ul>

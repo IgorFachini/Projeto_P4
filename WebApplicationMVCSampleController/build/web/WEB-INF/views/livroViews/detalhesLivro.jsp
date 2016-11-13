@@ -9,7 +9,7 @@
   
         <h1>Detalhes Livro</h1>
         <hr />
-        <form action="mvc?cmd=GeneroCmd&action=editado" method="post">
+        <form action="mvc?cmd=LivroCmd&action=editado" method="post">
             <dl class="dl-horizontal">
                 <dt>
                     <p><strong>ID:</strong></p>

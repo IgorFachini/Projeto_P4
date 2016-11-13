@@ -14,15 +14,15 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import org.catolica.prog4.persistencia.daos.exceptions.NonexistentEntityException;
-import org.catolica.prog4.persistencia.entities.Rule;
+import org.catolica.prog4.persistencia.entities.Manga;
 
 /**
  *
- * @author ftdippold
+ * @author Cyber
  */
-public class RuleJpaController implements Serializable {
+public class MangaJpaController implements Serializable {
 
-    public RuleJpaController(EntityManagerFactory emf) {
+    public MangaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,12 +31,12 @@ public class RuleJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Rule rule) {
+    public void create(Manga manga) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(rule);
+            em.persist(manga);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,19 +45,19 @@ public class RuleJpaController implements Serializable {
         }
     }
 
-    public void edit(Rule rule) throws NonexistentEntityException, Exception {
+    public void edit(Manga manga) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            rule = em.merge(rule);
+            manga = em.merge(manga);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = rule.getId();
-                if (findRule(id) == null) {
-                    throw new NonexistentEntityException("The rule with id " + id + " no longer exists.");
+                Long id = manga.getId();
+                if (findManga(id) == null) {
+                    throw new NonexistentEntityException("The manga with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,14 +73,14 @@ public class RuleJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Rule rule;
+            Manga manga;
             try {
-                rule = em.getReference(Rule.class, id);
-                rule.getId();
+                manga = em.getReference(Manga.class, id);
+                manga.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The rule with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The manga with id " + id + " no longer exists.", enfe);
             }
-            em.remove(rule);
+            em.remove(manga);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -89,19 +89,19 @@ public class RuleJpaController implements Serializable {
         }
     }
 
-    public List<Rule> findRuleEntities() {
-        return findRuleEntities(true, -1, -1);
+    public List<Manga> findMangaEntities() {
+        return findMangaEntities(true, -1, -1);
     }
 
-    public List<Rule> findRuleEntities(int maxResults, int firstResult) {
-        return findRuleEntities(false, maxResults, firstResult);
+    public List<Manga> findMangaEntities(int maxResults, int firstResult) {
+        return findMangaEntities(false, maxResults, firstResult);
     }
 
-    private List<Rule> findRuleEntities(boolean all, int maxResults, int firstResult) {
+    private List<Manga> findMangaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Rule.class));
+            cq.select(cq.from(Manga.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,20 +113,20 @@ public class RuleJpaController implements Serializable {
         }
     }
 
-    public Rule findRule(Long id) {
+    public Manga findManga(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Rule.class, id);
+            return em.find(Manga.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getRuleCount() {
+    public int getMangaCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Rule> rt = cq.from(Rule.class);
+            Root<Manga> rt = cq.from(Manga.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

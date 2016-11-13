@@ -9,29 +9,32 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import org.catolica.prog4.persistencia.daos.exceptions.NonexistentEntityException;
-import org.catolica.prog4.persistencia.entities.Livro;
+import org.catolica.prog4.persistencia.entities.Manga;
 
 /**
  *
  * @author Cyber
  */
-public interface ILivroDAO {
-      //Padrões gerados:
-    void create(Livro livro);
+public interface IMangaDAO {
+    
+       void create(Manga manga);
 
     void destroy(Long id) throws NonexistentEntityException;
 
-    void edit(Livro livro) throws NonexistentEntityException, Exception;
+    void edit(Manga manga) throws NonexistentEntityException, Exception;
 
-    Livro findLivro(Long id);
+    Manga findManga(Long id);
 
-    List<Livro> findLivroEntities();
+    List<Manga> findMangaEntities();
 
-    List<Livro> findLivroEntities(int maxResults, int firstResult);
+    List<Manga> findMangaEntities(int maxResults, int firstResult);
 
     EntityManager getEntityManager();
 
-    int getLivroCount();
+    int getMangaCount();
 
-    List<Livro> findAll();
+    List<Manga> findAll();
+    
+    
+    
 }

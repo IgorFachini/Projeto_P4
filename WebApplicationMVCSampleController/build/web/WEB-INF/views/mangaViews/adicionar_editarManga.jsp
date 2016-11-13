@@ -5,43 +5,37 @@
 --%>
 
 
-<title>Adicionar/Editar Generos</title>
+<title>Adicionar/Editar Manga</title>
 <!-- Bootstraps -->
 <%@include file="/WEB-INF/jspf/head.jspf"%>
-<div class="form-group"><h2><span class="glyphicon glyphicon-plus"></span> ${tAdEd} livro</h2></div>
+<div class="form-group"><h2><span class="glyphicon glyphicon-plus"></span> ${tAdEd} manga</h2></div>
 
 <hr />
-<form action="mvc?cmd=LivroCmd&action=editado" method="post">
+<form action="mvc?cmd=MangaCmd&action=editado" method="post">
     <div class="row">
 
 
         <div class="form-group col-xs-3">
             <label for="id"> ID</label> 
-            <input class="form-control" type="text" name="id" value="<c:out value="${livro.id}" />" readonly="readonly" placeholder="Livro ID" />
+            <input class="form-control" type="text" name="id" value="<c:out value="${manga.id}" />" readonly="readonly" placeholder="Manga ID" />
         </div>
 
         <div class="form-group col-xs-8">
             <label for="titulo">Titulo</label> 
-            <input class="form-control" type="text"  required="required" name="titulo" value="<c:out value="${livro.titulo}" />" placeholder="Titulo" />
+            <input class="form-control" type="text"  required="required" name="titulo" value="<c:out value="${manga.titulo}" />" placeholder="Titulo" />
         </div>
 
     </div>
 
     <div class="row">
         <div class="form-group col-xs-3">
-            <label for="autor">Autor</label> 
-            <input class="form-control" type="text"  name="autor" value="<c:out value="${livro.autor}" />" placeholder="Autor" />
+            <label for="autor">Descricao</label> 
+            <input class="form-control" type="text"  name="descricao" value="<c:out value="${manga.descricao}" />" placeholder="descricao" />
         </div>
-
-        <div class="form-group col-xs-3">
-            <label for="ano">Ano Edição</label> 
-            <input class="form-control" type="number"  id = "ano" name="ano" value="<c:out value="${livro.anoEdicao}" />" placeholder="Ano edição" />
-
-        </div>
-
+       
         <div class="form-group col-xs-3">
             <label for="valor">Valor</label> 
-            <input class="form-control" type="number"  name="valor" value="<c:out value="${livro.valor}" />" placeholder="Valor" />
+            <input class="form-control" type="number"  name="valor" value="<c:out value="${manga.valor}" />" placeholder="Valor" />
         </div>
 
         <div class="form-group col-xs-6">

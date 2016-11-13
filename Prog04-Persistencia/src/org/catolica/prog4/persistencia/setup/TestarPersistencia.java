@@ -10,11 +10,9 @@ import javax.persistence.Persistence;
 import org.catolica.prog4.persistencia.daos.GeneroDAO;
 import org.catolica.prog4.persistencia.daos.LivroDAO;
 
-import org.catolica.prog4.persistencia.daos.RuleDAO;
 import org.catolica.prog4.persistencia.daos.UserDAO;
 import org.catolica.prog4.persistencia.entities.Genero;
 import org.catolica.prog4.persistencia.entities.Livro;
-import org.catolica.prog4.persistencia.entities.Rule;
 import org.catolica.prog4.persistencia.entities.User;
 
 
@@ -84,15 +82,7 @@ public class TestarPersistencia {
         }
     }
 
-    private static void findAllRulesTest() {
-        System.out.println("\n findAllRulesTest...");
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenciaPU");
-        RuleDAO dao = new RuleDAO(factory);
-        List<Rule> lst = dao.findRuleEntities();
-        for (Rule o : lst) {
-            System.out.println(o);
-        }
-    }
+   
 
     private static void createUserTest() {
         System.out.println("\ncreateTest...");
@@ -114,21 +104,6 @@ public class TestarPersistencia {
         dao.create(o);
     }
 
-    private static void createRuletest() {
-        System.out.println("\ncreateRuletest...");
-        String[] data = {"Administrador", "Comprador", "Vendedor", "Gerente", "Diretor"};
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenciaPU");
-        RuleDAO dao = new RuleDAO(factory);
-        List<Rule> lst = dao.findRuleEntities();
-        for (int i = 0; i < data.length; i++) {
-            Rule o = new Rule();
-            o.setNome(data[i]);
-            dao.create(o);
-        }
-    }
-    //==========================================================================================
-    
-    //========================================================================================== 
      
     
 
@@ -161,19 +136,7 @@ public class TestarPersistencia {
         }
     }
 
-    private static void deleteAllRuleTest() {
-        System.out.println("\ndeleteAllRuleTest");
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenciaPU");
-        RuleDAO dao = new RuleDAO(factory);
-        List<Rule> lst = dao.findRuleEntities();
-        for (Rule o : lst) {
-            try {
-                dao.destroy(o.getId());
-            } catch (Exception ex) {
-               // Logger.getLogger(TestarPersistencia.class.getName()).log(Level.SEVERE,null,ex);
-            }
-        }
-    }
+    
 
     private static User autenticar(String email, String passwd) {
         final String PERSISTENCE_UNIT_NAME = "PersistenciaPU";

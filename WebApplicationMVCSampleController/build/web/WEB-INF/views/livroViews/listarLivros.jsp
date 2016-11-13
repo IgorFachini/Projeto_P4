@@ -17,7 +17,7 @@
         <%@include file="/WEB-INF/jspf/header.jspf"%>
         <div  class="container-fluid">
 
-            
+
             <h1>Livros</h1>
             <div class="row">
                 <div class="col-lg-6">
@@ -31,9 +31,9 @@
                 <div class="col-lg-6">
                     <form action="mvc?cmd=LivroCmd&action=procurar" method="post">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Procurar pelo nome" id="cProcurar" name="cProcurar"/>
+                            <input type="text" class="form-control" placeholder="Procurar pelo id,nome,valor,genero" id="cProcurar" name="cProcurar"/>
                             <span class="input-group-btn">
-                                
+
                                 <a class="btn btn-warning" type="submit" value="Ir" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
                             </span>
                         </div>
@@ -47,6 +47,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Livro</th>
+                        <th>Valor</th>
+                        <th>Genero</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -55,6 +57,8 @@
                         <tr>
                             <td><c:out value="${o.id}" /></td>
                             <td><c:out value="${o.titulo}" /></td>
+                            <td><c:out value="${o.valor}"/></td>
+                            <td><c:out value="${o.genero.nome}"/></td>
                             <td>
                                 <a href="mvc?cmd=LivroCmd&action=detalhes&id=<c:out value="${o.id}"/>" class="btn btn-success" data-toggle="modal" data-target="#util-modal" data-placement="left" >
                                     <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
@@ -72,6 +76,7 @@
                 </tbody>
             </table>
 
+            
         </div>
 
         <%@include file="/WEB-INF/jspf/modal.jspf"%>
@@ -79,6 +84,6 @@
 ================================================== -->
         <%@include file="/WEB-INF/jspf/footer.jspf"%>
 
-       
+
     </body>
 </html>

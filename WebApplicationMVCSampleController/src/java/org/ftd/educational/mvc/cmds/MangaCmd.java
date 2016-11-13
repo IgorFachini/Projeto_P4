@@ -17,10 +17,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.catolica.prog4.persistencia.daos.GeneroDAO;
-import org.catolica.prog4.persistencia.daos.LivroDAO;
+import org.catolica.prog4.persistencia.daos.MangaDAO;
 import org.catolica.prog4.persistencia.daos.exceptions.NonexistentEntityException;
 import org.catolica.prog4.persistencia.entities.Genero;
-import org.catolica.prog4.persistencia.entities.Livro;
+import org.catolica.prog4.persistencia.entities.Manga;
 import org.ftd.educational.mvc.abstacts.AbstractWebCmd;
 import org.ftd.educational.mvc.interfaces.IWebCmd;
 import org.ftd.educational.mvc.utils.util;
@@ -29,26 +29,26 @@ import org.ftd.educational.mvc.utils.util;
  *
  * @author Cyber
  */
-public class LivroCmd extends AbstractWebCmd implements IWebCmd {
+public class MangaCmd extends AbstractWebCmd implements IWebCmd {
 
     private static final String ERRO = "erro";
     private static final String MENSAGEM = "msg";
 
-    private static final String list = "/WEB-INF/views/livroViews/listarLivros.jsp";
-    private static final String INSERT_OR_EDIT = "/WEB-INF/views/livroViews/adicionar_editarLivro.jsp";
-    private static final String detalhes = "/WEB-INF/views/livroViews/detalhesLivro.jsp";
-    private static final String deletar = "/WEB-INF/views/livroViews/deletarLivro.jsp";
+    private static final String list = "/WEB-INF/views/mangaViews/listarMangas.jsp";
+    private static final String INSERT_OR_EDIT = "/WEB-INF/views/mangaViews/adicionar_editarManga.jsp";
+    private static final String detalhes = "/WEB-INF/views/mangaViews/detalhesManga.jsp";
+    private static final String deletar = "/WEB-INF/views/mangaViews/deletarManga.jsp";
     private String forward = "";
     private static final EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenciaPU");
-    private final LivroDAO livroDao;
+    private final MangaDAO mangaDao;
     private final GeneroDAO generoDao;
     private Long id;
-    private Livro livro;
+    private Manga manga;
     private List<Genero> generos;
 
-    public LivroCmd() {
+    public MangaCmd() {
         generoDao = new GeneroDAO(factory);
-        livroDao = new LivroDAO(factory);
+        mangaDao = new MangaDAO(factory);
         generos = new ArrayList<>();
     }
 
@@ -56,7 +56,7 @@ public class LivroCmd extends AbstractWebCmd implements IWebCmd {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         super.setDefaultAppModel(request);
         id = null;
-        livro = null;
+        manga = null;
         String action = "";
         if (request.getParameter("action") != null) {
             action = request.getParameter("action");
@@ -79,34 +79,30 @@ public class LivroCmd extends AbstractWebCmd implements IWebCmd {
 
                 break;
             case "editado":
-
-                livro = new Livro();
-                String livroId = request.getParameter("id");
-                livro.setTitulo(request.getParameter("titulo"));
+                manga = new Manga();
+                String mangaId = request.getParameter("id");
+                manga.setTitulo(request.getParameter("titulo"));
                 Genero genero = new Genero();
                 genero = generoDao.findGenero(Long.parseLong(request.getParameter("comboGeneros")));
-                livro.setGenero(genero);
-                if (request.getParameter("autor") != null) {
-                    livro.setAutor(request.getParameter("autor"));
-                }
-                if (request.getParameter("ano") != null) {
-                    livro.setAnoEdicao(Integer.parseInt(request.getParameter("ano")));
+                manga.setGenero(genero);
+                if (request.getParameter("descricao") != null) {
+                    manga.setDescricao(request.getParameter("descricao"));
                 }
                 if (request.getParameter("valor") != null) {
-                    livro.setValor(request.getParameter("valor"));
+                    manga.setValor(request.getParameter("valor"));
                 }
 
-                if (livroId == null || livroId.isEmpty()) {
-                    livroDao.create(livro);
-                    request.setAttribute(MENSAGEM, "Livro criado com sucesso");
+                if (mangaId == null || mangaId.isEmpty()) {
+                    mangaDao.create(manga);
+                    request.setAttribute(MENSAGEM, "Manga criado com sucesso");
                 } else {
-                    livro.setId(Long.parseLong(livroId));
+                    manga.setId(Long.parseLong(mangaId));
                     try {
-                        livroDao.edit(livro);
-                        request.setAttribute(MENSAGEM, "Livro editado com sucesso");
+                        mangaDao.edit(manga);
+                        request.setAttribute(MENSAGEM, "Manga editado com sucesso");
                     } catch (Exception ex) {
-                        Logger.getLogger(LivroCmd.class.getName()).log(Level.SEVERE, null, ex);
-                        request.setAttribute(ERRO, "Erro ao editar livro");
+                        Logger.getLogger(MangaCmd.class.getName()).log(Level.SEVERE, null, ex);
+                        request.setAttribute(ERRO, "Erro ao editar manga");
                     }
                 }
 
@@ -120,10 +116,10 @@ public class LivroCmd extends AbstractWebCmd implements IWebCmd {
             case "excluido":
                 id = Long.parseLong(request.getParameter("id"));
                 try {
-                    livroDao.destroy(id);
-                    request.setAttribute(MENSAGEM, "Livro excluido com sucesso");
+                    mangaDao.destroy(id);
+                    request.setAttribute(MENSAGEM, "Manga excluido com sucesso");
                 } catch (NonexistentEntityException ex) {
-                    Logger.getLogger(LivroCmd.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MangaCmd.class.getName()).log(Level.SEVERE, null, ex);
                     request.setAttribute(ERRO, "Erro ao excluir");
                 }
                 recarregarListagem(request);
@@ -135,24 +131,20 @@ public class LivroCmd extends AbstractWebCmd implements IWebCmd {
                     recarregarListagem(request);
                 } else {
 
-                    List<Livro> livrosFiltrados = new ArrayList<>();
+                    List<Manga> mangasFiltrados = new ArrayList<>();
 
-                    allLivros().stream().filter((p) -> ((util.tryParseLong(conteudo) && Long.parseLong(conteudo) == p.getId())
+                    allMangas().stream().filter((p) -> ((util.tryParseLong(conteudo) && Long.parseLong(conteudo) == p.getId())
                             || (p.getTitulo().toLowerCase().contains(conteudo))
                             || (p.getValor().contains(conteudo))
                             || (p.getGenero().getNome().toLowerCase().contains(conteudo)))).forEachOrdered((p) -> {
-                        livrosFiltrados.add(p);
+                        mangasFiltrados.add(p);
                     });
 
-                    if (livrosFiltrados.isEmpty()) {
+                    if (mangasFiltrados.isEmpty()) {
                         request.setAttribute(ERRO, "Nenhum resultado encontrado");
                     }
 
-                    request.setAttribute("livros", livrosFiltrados);
-
-                    if (livrosFiltrados.isEmpty()) {
-                        request.setAttribute(ERRO, "Nenhum resultado encontrado");
-                    }
+                    request.setAttribute("mangas", mangasFiltrados);
                 }
 
                 forward = list;
@@ -168,24 +160,34 @@ public class LivroCmd extends AbstractWebCmd implements IWebCmd {
 
     public void recarregarListagem(HttpServletRequest request) {
         forward = list;
-        request.setAttribute("livros", this.allLivros());
+        request.setAttribute("mangas", this.allMangas());
     }
 
-    private List<Livro> allLivros() {
+    private List<Manga> allMangas() {
 
-        List<Livro> lst = livroDao.findLivroEntities();
+        List<Manga> lst = mangaDao.findMangaEntities();
 
         return lst;
     }
 
     private void repassarParamentroParaTela(HttpServletRequest request, String tela) {
         id = Long.parseLong(request.getParameter("id"));
-        livro = livroDao.findLivro(id);
+        manga = mangaDao.findManga(id);
         generos = generoDao.findAll();
         request.setAttribute("comboGeneros", generos);
-        request.setAttribute("idSelecionado", livro.getGenero().getId());
-        request.setAttribute("livro", livro);
+        request.setAttribute("idSelecionado", manga.getGenero().getId());
+        request.setAttribute("manga", manga);
         forward = tela;
     }
-;
+
+    private List<Manga> recuperarMangaRelacionadoManga(Long idManga) {
+        EntityManager em = mangaDao.getEntityManager();
+        em.getTransaction().begin();
+        Manga persistentManga = em.find(Manga.class, idManga);
+        // List<Manga> mangas = persistentManga.getMangas();
+        List<Manga> mangas = null;
+
+        return mangas;
+    }
+
 }

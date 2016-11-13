@@ -5,26 +5,24 @@
  */
 package org.catolica.prog4.persistencia.daos;
 
-import org.catolica.prog4.persistencia.interfaces.IGeneroDAO;
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
-import org.catolica.prog4.persistencia.entities.Genero;
+import org.catolica.prog4.persistencia.entities.Manga;
+import org.catolica.prog4.persistencia.interfaces.IMangaDAO;
 
 /**
  *
  * @author Cyber
  */
-public class GeneroDAO extends GeneroJpaController implements IGeneroDAO {
+public class MangaDAO extends MangaJpaController implements IMangaDAO {
 
-    public GeneroDAO(EntityManagerFactory emf) {
+    public MangaDAO(EntityManagerFactory emf) {
         super(emf);
     }
 
     @Override
-    public List<Genero> findAll() {
-        return super.findGeneroEntities();
-    }
+    public List<Manga> findAll() {
+        return super.findMangaEntities();
+    }   
 }

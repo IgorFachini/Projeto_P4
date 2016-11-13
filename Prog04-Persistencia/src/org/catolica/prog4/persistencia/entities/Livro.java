@@ -27,7 +27,7 @@ public class Livro implements Serializable {
     @Column(name = "livro_id")
     private Long id;
 
-    @Column(unique = true, nullable = false, length = 45)
+    @Column(unique = true, nullable = false, length = 80)
     private String titulo;
     @Column(unique = false, nullable = true, length = 45)
     private String autor;

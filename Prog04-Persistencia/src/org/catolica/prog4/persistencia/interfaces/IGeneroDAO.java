@@ -3,6 +3,7 @@ package org.catolica.prog4.persistencia.interfaces;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import org.catolica.prog4.persistencia.daos.exceptions.IllegalOrphanException;
 import org.catolica.prog4.persistencia.daos.exceptions.NonexistentEntityException;
 import org.catolica.prog4.persistencia.entities.Genero;
 
@@ -10,9 +11,9 @@ public interface IGeneroDAO {
 
     void create(Genero genero);
 
-    void destroy(Long id) throws NonexistentEntityException;
+    void destroy(Long id) throws IllegalOrphanException,NonexistentEntityException;
 
-    void edit(Genero genero) throws NonexistentEntityException, Exception;
+    void edit(Genero genero) throws IllegalOrphanException,NonexistentEntityException, Exception;
 
     Genero findGenero(Long id);
 
@@ -25,7 +26,4 @@ public interface IGeneroDAO {
     int getGeneroCount();
 
     List<Genero> findAll();
-    
-    List<Genero> findGenero(String pesquisa) throws NoResultException;
-
 }

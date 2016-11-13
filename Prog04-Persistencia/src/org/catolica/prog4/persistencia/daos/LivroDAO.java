@@ -27,10 +27,4 @@ public class LivroDAO extends LivroJpaController implements ILivroDAO {
     public List<Livro> findAll() {
         return super.findLivroEntities();
     }
-
-    @Override
-    public List<Livro> findLivro(String pesquisa) throws NoResultException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

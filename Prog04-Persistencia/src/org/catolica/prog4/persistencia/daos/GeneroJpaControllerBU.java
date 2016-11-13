@@ -18,15 +18,14 @@ import javax.persistence.EntityManagerFactory;
 import org.catolica.prog4.persistencia.daos.exceptions.IllegalOrphanException;
 import org.catolica.prog4.persistencia.daos.exceptions.NonexistentEntityException;
 import org.catolica.prog4.persistencia.entities.Genero;
-import org.catolica.prog4.persistencia.entities.Manga;
 
 /**
  *
  * @author Cyber
  */
-public class GeneroJpaController implements Serializable {
+public class GeneroJpaControllerBU implements Serializable {
 
-    public GeneroJpaController(EntityManagerFactory emf) {
+    public GeneroJpaControllerBU(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -39,9 +38,6 @@ public class GeneroJpaController implements Serializable {
         if (genero.getLivros() == null) {
             genero.setLivros(new ArrayList<Livro>());
         }
-        if (genero.getMangas() == null) {
-            genero.setMangas(new ArrayList<Manga>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -52,12 +48,6 @@ public class GeneroJpaController implements Serializable {
                 attachedLivros.add(livrosLivroToAttach);
             }
             genero.setLivros(attachedLivros);
-            List<Manga> attachedMangas = new ArrayList<Manga>();
-            for (Manga mangasMangaToAttach : genero.getMangas()) {
-                mangasMangaToAttach = em.getReference(mangasMangaToAttach.getClass(), mangasMangaToAttach.getId());
-                attachedMangas.add(mangasMangaToAttach);
-            }
-            genero.setMangas(attachedMangas);
             em.persist(genero);
             for (Livro livrosLivro : genero.getLivros()) {
                 Genero oldGeneroOfLivrosLivro = livrosLivro.getGenero();
@@ -66,15 +56,6 @@ public class GeneroJpaController implements Serializable {
                 if (oldGeneroOfLivrosLivro != null) {
                     oldGeneroOfLivrosLivro.getLivros().remove(livrosLivro);
                     oldGeneroOfLivrosLivro = em.merge(oldGeneroOfLivrosLivro);
-                }
-            }
-            for (Manga mangasManga : genero.getMangas()) {
-                Genero oldGeneroOfMangasManga = mangasManga.getGenero();
-                mangasManga.setGenero(genero);
-                mangasManga = em.merge(mangasManga);
-                if (oldGeneroOfMangasManga != null) {
-                    oldGeneroOfMangasManga.getMangas().remove(mangasManga);
-                    oldGeneroOfMangasManga = em.merge(oldGeneroOfMangasManga);
                 }
             }
             em.getTransaction().commit();
@@ -93,8 +74,6 @@ public class GeneroJpaController implements Serializable {
             Genero persistentGenero = em.find(Genero.class, genero.getId());
             List<Livro> livrosOld = persistentGenero.getLivros();
             List<Livro> livrosNew = genero.getLivros();
-            List<Manga> mangasOld = persistentGenero.getMangas();
-            List<Manga> mangasNew = genero.getMangas();
             List<String> illegalOrphanMessages = null;
             for (Livro livrosOldLivro : livrosOld) {
                 if (!livrosNew.contains(livrosOldLivro)) {
@@ -102,14 +81,6 @@ public class GeneroJpaController implements Serializable {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
                     illegalOrphanMessages.add("You must retain Livro " + livrosOldLivro + " since its genero field is not nullable.");
-                }
-            }
-            for (Manga mangasOldManga : mangasOld) {
-                if (!mangasNew.contains(mangasOldManga)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Manga " + mangasOldManga + " since its genero field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -122,13 +93,6 @@ public class GeneroJpaController implements Serializable {
             }
             livrosNew = attachedLivrosNew;
             genero.setLivros(livrosNew);
-            List<Manga> attachedMangasNew = new ArrayList<Manga>();
-            for (Manga mangasNewMangaToAttach : mangasNew) {
-                mangasNewMangaToAttach = em.getReference(mangasNewMangaToAttach.getClass(), mangasNewMangaToAttach.getId());
-                attachedMangasNew.add(mangasNewMangaToAttach);
-            }
-            mangasNew = attachedMangasNew;
-            genero.setMangas(mangasNew);
             genero = em.merge(genero);
             for (Livro livrosNewLivro : livrosNew) {
                 if (!livrosOld.contains(livrosNewLivro)) {
@@ -138,17 +102,6 @@ public class GeneroJpaController implements Serializable {
                     if (oldGeneroOfLivrosNewLivro != null && !oldGeneroOfLivrosNewLivro.equals(genero)) {
                         oldGeneroOfLivrosNewLivro.getLivros().remove(livrosNewLivro);
                         oldGeneroOfLivrosNewLivro = em.merge(oldGeneroOfLivrosNewLivro);
-                    }
-                }
-            }
-            for (Manga mangasNewManga : mangasNew) {
-                if (!mangasOld.contains(mangasNewManga)) {
-                    Genero oldGeneroOfMangasNewManga = mangasNewManga.getGenero();
-                    mangasNewManga.setGenero(genero);
-                    mangasNewManga = em.merge(mangasNewManga);
-                    if (oldGeneroOfMangasNewManga != null && !oldGeneroOfMangasNewManga.equals(genero)) {
-                        oldGeneroOfMangasNewManga.getMangas().remove(mangasNewManga);
-                        oldGeneroOfMangasNewManga = em.merge(oldGeneroOfMangasNewManga);
                     }
                 }
             }
@@ -169,7 +122,7 @@ public class GeneroJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Long id) throws  NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -189,15 +142,8 @@ public class GeneroJpaController implements Serializable {
                 }
                 illegalOrphanMessages.add("This Genero (" + genero + ") cannot be destroyed since the Livro " + livrosOrphanCheckLivro + " in its livros field has a non-nullable genero field.");
             }
-            List<Manga> mangasOrphanCheck = genero.getMangas();
-            for (Manga mangasOrphanCheckManga : mangasOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Genero (" + genero + ") cannot be destroyed since the Manga " + mangasOrphanCheckManga + " in its mangas field has a non-nullable genero field.");
-            }
             if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
+                //throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(genero);
             em.getTransaction().commit();

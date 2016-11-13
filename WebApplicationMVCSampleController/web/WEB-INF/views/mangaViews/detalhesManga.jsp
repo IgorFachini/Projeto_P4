@@ -3,55 +3,49 @@
     Created on : 03/11/2016, 13:26:22
     Author     : Cyber
 --%>
-         <title>Detalhes Livro</title>
+         <title>Detalhes Manga</title>
 
         <%@include file="/WEB-INF/jspf/head.jspf"%>
   
-        <h1>Detalhes Livro</h1>
+        <h1>Detalhes Manga</h1>
         <hr />
-        <form action="mvc?cmd=LivroCmd&action=editado" method="post">
+        <form action="mvc?cmd=MangaCmd&action=editado" method="post">
             <dl class="dl-horizontal">
                 <dt>
                     <p><strong>ID:</strong></p>
                 </dt>
 
                 <dd>
-                <td name="id"><c:out value="${livro.id}" /></td>
+                <td name="id"><c:out value="${manga.id}" /></td>
                 </dd>
                 <dt>
                     <p><strong>Titulo: </strong></p>
                 </dt>
 
                 <dd>
-                <td><c:out value="${livro.titulo}" /></td>
+                <td><c:out value="${manga.titulo}" /></td>
                 </dd>
                 <dt>
-                    <p><strong>Autor: </strong></p>
+                    <p><strong>Descrição: </strong></p>
                 </dt>
 
                 <dd>
-                <td><c:out value="${livro.autor}" /></td>
+                <td><c:out value="${manga.descricao}" /></td>
                 </dd>
-                <dt>
-                    <p><strong>Ano Edição: </strong></p>
-                </dt>
-
-                <dd>
-                <td><c:out value="${livro.anoEdicao}" /></td>
-                </dd>
+                
                 <dt>
                     <p><strong>Valor: </strong></p>
                 </dt>
 
                 <dd>
-                <td><c:out value="${livro.valor}" /></td>
+                <td><c:out value="${manga.valor}" /></td>
                 </dd>
                   <dt>
                     <p><strong>Genero: </strong></p>
                 </dt>
 
                 <dd>
-                <td><c:out value="${livro.genero.nome}" /></td>
+                <td><c:out value="${manga.genero.nome}" /></td>
                 </dd>
                 
 
